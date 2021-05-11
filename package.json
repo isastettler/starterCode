@@ -1,0 +1,33 @@
+{
+  "name": "hitormiss",
+  "version": "1.0.0",
+  "description": "Tutorial for Phaser 3 sprite effect \"sprite hit\"",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build-client": "webpack",
+    "build-client-watch": "webpack -w",
+    "lint": "eslint ./ --ignore-path .gitignore",
+    "lint-fix": "npm run lint -- --fix",
+    "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
+    "start": "node server",
+    "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
+    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "phaser": "^3.24.1",
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.8",
+    "@babel/preset-env": "^7.12.7",
+    "babel-loader": "^8.2.1",
+    "nodemon": "^2.0.6",
+    "raw-loader": "^0.5.1",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0"
+  }
+}
