@@ -6,7 +6,7 @@ But this hasn't happened yet!*/
 
 import "phaser";
 import config from "./config/config";
-
+//import you scenes here
 import MainScene from "./scenes/MainScene";
 
 class Game extends Phaser.Game {

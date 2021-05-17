@@ -26,6 +26,7 @@ export default class MainScene extends Phaser.Scene {
     create(){
         this.add.image(300, 110, "bg").setScale(0.5);
         this.physics.world.setBounds(-10, 0, 620, 270);
+        // CREATE AVATAR
         createAvatar(this, 300, 275);
 
         // CREATE THE COUNTDOWN 
@@ -33,10 +34,10 @@ export default class MainScene extends Phaser.Scene {
         this.birdCount = 0;
         this.text= this.add.text(50, 15, "00:00")
         this.score = this.add.text(50, 30, `you got hit: ${this.avatar.hitCount}\nyou killed: ${this.birdCount}`)
-        // CREATE GROUPS TO ADD EACH CRAETED BIRD/BIRDSHIT/BULLET
+        // CREATE GROUPS TO ADD EACH CREATED BIRD/BIRDSHIT/BULLET
         this.birds = this.add.group();
         this.shits = this.add.group();
-
+        // CREATE THE BIRD
         createBird(this, "bird");
         this.nextShit = Phaser.Math.Between(500, 1000);
         this.birds.getChildren().forEach(bird => {
@@ -70,6 +71,8 @@ export default class MainScene extends Phaser.Scene {
 }
 
 //ADD ALL FUNCTIONS USED IN THE MAINSCENE
+
+//sprite create functions
 function createAvatar(scene, x, y) {
     createAvatarAnimations(scene, "avatar");
     scene.avatar = new Avatar(scene, x, y, "avatar").setSize(20, 30);
@@ -89,28 +92,7 @@ function createShit(scene, sprite, coordinates){
     let newShit = new Shit(scene, x, y, sprite).setScale(0.2);
     scene.shits.add(newShit);
 }
-
-function createBirdAnimations(scene, sprite){
-    scene.anims.create({
-        key: "flyingRight",
-        frames: scene.anims.generateFrameNumbers(sprite, {
-            start: 3,
-            end: 5
-        }),
-        frameRate: 3,
-        repeat: -1
-    });
-    scene.anims.create({
-        key: "flyingLeft",
-        frames: scene.anims.generateFrameNumbers(sprite, {
-            start: 6,
-            end: 8
-        }),
-        frameRate: 3,
-        repeat: -1
-    })
-}
-
+//animatin create functions
 function createAvatarAnimations(scene, sprite){
     scene.anims.create({
         key: "stand-right",
@@ -144,28 +126,29 @@ function createAvatarAnimations(scene, sprite){
         frameRate: 4,
         repeat: -1
     });
-    scene.anims.create({
-        key: "shoot-right",
-        frames: scene.anims.generateFrameNumbers(sprite, {
-            start: 40,
-            end: 44,
-        }),
-        frameRate: 6,
-        repeat: 1
-    })
-    scene.anims.create({
-        key: "shoot-left",
-        frames: scene.anims.generateFrameNumbers(sprite, {
-            start: 32,
-            end: 36,
-        }),
-        frameRate: 6,
-        repeat: 1
-    })
 }
 
-
-
+function createBirdAnimations(scene, sprite){
+    scene.anims.create({
+        key: "flyingRight",
+        frames: scene.anims.generateFrameNumbers(sprite, {
+            start: 3,
+            end: 5
+        }),
+        frameRate: 3,
+        repeat: -1
+    });
+    scene.anims.create({
+        key: "flyingLeft",
+        frames: scene.anims.generateFrameNumbers(sprite, {
+            start: 6,
+            end: 8
+        }),
+        frameRate: 3,
+        repeat: -1
+    })
+}
+//event function to create bird shit
 function onEvent(){
     this.birds.getChildren().forEach(bird => {
         createShit(this, "shit", bird.getBounds());
