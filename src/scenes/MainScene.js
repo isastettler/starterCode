@@ -28,9 +28,13 @@ export default class MainScene extends Phaser.Scene {
         this.physics.world.setBounds(-10, 0, 620, 270);
         // CREATE AVATAR
         createAvatar(this, 300, 275);
+        // ADD KEYBOARD CONTROLLS FOR NAVIGATION
+        this.cursors = this.input.keyboard.addKeys({
+        left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+        right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+        }) 
 
         // CREATE THE COUNTDOWN 
-        this.countdown = 150;
         this.birdCount = 0;
         this.text= this.add.text(50, 15, "00:00")
         this.score = this.add.text(50, 30, `you got hit: ${this.avatar.hitCount}\nyou killed: ${this.birdCount}`)
@@ -49,17 +53,9 @@ export default class MainScene extends Phaser.Scene {
             });
         })
        
-        //ADD KEYBOARD CONTROLLS FOR NAVIGATION
-        this.cursors = this.input.keyboard.addKeys({
-            left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-            right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-        }) 
-        this.nextShotAt = 0;
-        this.shotDelay = 500;   
-
     }
     update(){
-        //check on keyboard controls for movement update
+        // check on keyboard controls for movement update
         if(this.avatar){
             this.avatar.update(this.cursors);
             let y = this.avatar.getBounds().y
@@ -70,9 +66,9 @@ export default class MainScene extends Phaser.Scene {
     }
 }
 
-//ADD ALL FUNCTIONS USED IN THE MAINSCENE
+// ADD ALL FUNCTIONS USED IN THE MAINSCENE
 
-//sprite create functions
+// sprite create functions
 function createAvatar(scene, x, y) {
     createAvatarAnimations(scene, "avatar");
     scene.avatar = new Avatar(scene, x, y, "avatar").setSize(20, 30);
@@ -92,7 +88,7 @@ function createShit(scene, sprite, coordinates){
     let newShit = new Shit(scene, x, y, sprite).setScale(0.2);
     scene.shits.add(newShit);
 }
-//animatin create functions
+// animatin create functions
 function createAvatarAnimations(scene, sprite){
     scene.anims.create({
         key: "stand-right",
