@@ -42,8 +42,8 @@ export default class MainScene extends Phaser.Scene {
         this.birds = this.add.group();
         this.shits = this.add.group();
         // CREATE THE BIRD
-        createBird(this, "bird");
         this.nextShit = Phaser.Math.Between(500, 1000);
+        createBird(this, "bird");
         this.birds.getChildren().forEach(bird => {
             bird.timer = this.time.addEvent({
                 delay: this.nextShit,
@@ -52,16 +52,11 @@ export default class MainScene extends Phaser.Scene {
                 repeat: -1
             });
         })
-       
     }
     update(){
         // check on keyboard controls for movement update
         if(this.avatar){
             this.avatar.update(this.cursors);
-            let y = this.avatar.getBounds().y
-            if(y > 300){
-                this.physics.pause();
-            }
         }
     }
 }
