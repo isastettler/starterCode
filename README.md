@@ -7,7 +7,7 @@ open up your terminal.
 ``` 
 mkdir hitOrMiss
 cd hitOrMiss
-git clone 
+git clone https://github.com/isastettler/starterCode.git
 
 npm install
 npm run start-dev
